@@ -1,91 +1,112 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeadphones, faUser, faHouse, faBlender, faCampground, faDog, faRandom } from "@fortawesome/free-solid-svg-icons";
+import Hero from "@/section/Hero/hero"
+import { GetDataPosts } from "@/utils/GetDataBanner/getDataPosts";
+import Carousel from "@/section/Carousel/carousel";
+import Section from "@/section/Post Section/Tech Section/section";
 
-const inter = Inter({ subsets: ['latin'] })
+export default async function Home() {
+  
+  const posts = await GetDataPosts('https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,category,date&page=1&per_page=4&order_by=date&order=asc&_embed');
+  const dataPost = JSON.stringify(posts)
 
-export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.jsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <>
+      <section className="w-full h-screen">
+        <Hero props={dataPost} children={<Carousel/>}/>
+      </section>
+      <section className="w-full h-[75vh] sm:h-[120vh]">
+        <Section 
+          url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=7'}
+          icon={
+            <FontAwesomeIcon 
+              icon={faHeadphones} 
+              size='sm' 
+              color="rgb(38,38,38)"
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          }
+          category={'tech'}
         />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </section>
+      <section className="w-full h-[75vh] sm:h-[120vh]">
+          <Section
+            url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=8'}
+            icon={
+              <FontAwesomeIcon 
+                icon={faUser} 
+                size='sm' 
+                color="rgb(38,38,38)"
+              />
+            }
+            category={`health & wellness`}
+          />
+      </section>
+      {/* <section className="w-full h-[75vh] sm:h-[120vh]">
+          <Section
+            url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=9'}
+            icon={
+              <FontAwesomeIcon 
+                icon={faHouse} 
+                size='sm' 
+                color="rgb(38,38,38)"
+              />
+            }
+            category={`home essentials + decor`}
+          />
+      </section> */}
+      {/* <section className="w-full h-[75vh] sm:h-[120vh]">
+          <Section
+            url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=22'}
+            icon={
+              <FontAwesomeIcon 
+                icon={faBlender} 
+                size='sm' 
+                color="rgb(38,38,38)"
+              />
+            }
+            category={`appliances`}
+          />
+      </section> */}
+      {/* <section className="w-full h-[75vh] sm:h-[120vh]">
+          <Section
+            url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=14'}
+            icon={
+              <FontAwesomeIcon 
+                icon={faCampground} 
+                size='sm' 
+                color="rgb(38,38,38)"
+              />
+            }
+            category={`outdoors`}
+          />
+      </section> */}
+      {/* <section className="w-full h-[75vh] sm:h-[120vh]">
+          <Section
+            url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=16'}
+            icon={
+              <FontAwesomeIcon 
+                icon={faDog} 
+                size='sm' 
+                color="rgb(38,38,38)"
+              />
+            }
+            category={'pets'}
+          />
+      </section> */}
+      {/* <section className="w-full h-[75vh] sm:h-[120vh]">
+          <Section
+            url={'https://offerclaw.com/index.php/wp-json/wp/v2/posts?_fields=title,excerpt,link,_links,date&per_page=4&order_by=date&order=desc&_embed&categories=16'}
+            icon={
+              <FontAwesomeIcon 
+                icon={faRandom} 
+                size='sm' 
+                color="rgb(38,38,38)"
+              />
+            }
+            category={`Other`}
+          />
+      </section> */}
+    </>
   )
 }
+
